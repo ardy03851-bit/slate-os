@@ -132,7 +132,7 @@
             const c = dir === 'up' || dir === 'down' ? c0 : r0;
             const id = grid[r][c];
             if (!id) continue;
-            let nr = r, nc = c;
+            let nr = r, nc = c, didMerge = false;
             // slide
             while (true) {
               const tr = nr + vec[0], tc = nc + vec[1];
@@ -142,20 +142,20 @@
               const tt = tiles.get(target);
               const me = tiles.get(id);
               if (tt.v === me.v && !tt.merged) {
-                // merge
+                // merge into the target tile
                 grid[r][c] = null;
-                grid[tr][tc] = target;
                 tt.v *= 2; tt.merged = true;
                 gained += tt.v;
                 me.el.remove(); tiles.delete(id);
                 paintTile(target);
                 if (tt.v === 2048 && !won) { won = true; }
                 moved = true;
+                didMerge = true;
               }
               break;
             }
-            if (grid[nr][nc] !== id && (nr !== r || nc !== c)) {
-              // moved to empty cell
+            if (!didMerge && (nr !== r || nc !== c)) {
+              // slid to an empty cell
               grid[r][c] = null;
               grid[nr][nc] = id;
               const me = tiles.get(id);

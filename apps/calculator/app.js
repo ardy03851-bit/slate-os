@@ -2,8 +2,8 @@
 (function () {
   const style = document.createElement('style');
   style.textContent = `
-    .calc-root { height: 100%; display: flex; flex-direction: column; background: #000; color: #fff; padding: 30px 18px 18px; }
-    .calc-display { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 0 12px 16px; min-height: 90px; }
+    .calc-root { height: 100%; display: flex; flex-direction: column; align-items: center; background: #000; color: #fff; padding: 30px 18px 18px; }
+    .calc-display { flex: 1; width: min(440px, 100%); display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 0 12px 16px; min-height: 90px; }
     .calc-history { font-size: 15px; color: #8e8e93; min-height: 20px; }
     .calc-value { font-size: clamp(48px, 9vw, 76px); font-weight: 300; letter-spacing: -2px; line-height: 1.1; word-break: break-all; text-align: right; }
     .calc-pad { display: grid; grid-template-columns: repeat(4, min(88px, calc((100dvh - 300px) * 0.16))); gap: 12px; justify-content: center; }

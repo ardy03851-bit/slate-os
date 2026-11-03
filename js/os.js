@@ -174,6 +174,8 @@ function unlock() {
 }
 
 /* ---------------- Home screen ---------------- */
+const DOCK_EXTERNALS = ['clock', 'calculator', 'notes'];
+
 function installedExternals() {
   return OS.catalog.filter(a => State.installed.includes(a.id));
 }
@@ -215,8 +217,9 @@ function renderHome() {
     grid.append(makeIcon({ id, name: app.name, iconSrc: app.icon, onOpen: () => openBuiltin(id), removable: false }));
   }
 
-  // installed external apps
+  // installed external apps (dock apps are excluded from the main grid)
   for (const app of installedExternals()) {
+    if (DOCK_EXTERNALS.includes(app.id)) continue;
     grid.append(makeIcon({
       id: app.id, name: app.name,
       iconSrc: `apps/${app.id}/icon.png`,
@@ -262,6 +265,7 @@ function closeCurrentApp() {
   if (!OS.currentApp) return;
   try { OS.currentApp.cleanup?.(); } catch (e) { /* ignore */ }
   OS.currentApp = null;
+  $('#screen').classList.remove('in-app', 'app-dark');
   const layer = $('#app-layer');
   for (const w of [...layer.children]) {
     w.classList.add('closing');
@@ -274,6 +278,8 @@ function mountWindow(dark = false) {
   const content = h('div', { class: 'app-content' });
   win.append(content);
   $('#app-layer').append(win);
+  $('#screen').classList.add('in-app');
+  $('#screen').classList.toggle('app-dark', dark);
   return { win, content };
 }
 

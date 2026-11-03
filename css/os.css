@@ -7,6 +7,7 @@
 :root {
   --font: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --bezel: 22px;
+  --bezel-bottom: 58px;
   --radius-screen: 26px;
 }
 
@@ -36,7 +37,7 @@ html, body {
   max-height: min(94dvh, 820px);
   background: linear-gradient(160deg, #3a3d45 0%, #17181c 30%, #101114 70%, #2c2e35 100%);
   border-radius: 40px;
-  padding: var(--bezel);
+  padding: var(--bezel) var(--bezel) var(--bezel-bottom);
   box-shadow:
     0 40px 90px rgba(0,0,0,.55),
     0 4px 18px rgba(0,0,0,.4),
@@ -69,9 +70,9 @@ html, body {
 
 #home-btn {
   position: absolute;
-  bottom: 6px; left: 50%;
+  bottom: 7px; left: 50%;
   transform: translateX(-50%);
-  width: 64px; height: 64px;
+  width: 44px; height: 44px;
   border-radius: 50%;
   border: none;
   cursor: pointer;
@@ -81,8 +82,8 @@ html, body {
 }
 #home-btn::after {
   content: "";
-  width: 20px; height: 20px;
-  border-radius: 6px;
+  width: 16px; height: 16px;
+  border-radius: 5px;
   border: 2.2px solid rgba(255,255,255,.55);
   transition: transform .15s, border-color .15s;
 }
@@ -103,6 +104,10 @@ html, body {
   pointer-events: none;
 }
 .sb-right { display: flex; align-items: center; gap: 5px; }
+
+/* status bar adapts to open app: dark text over light apps */
+#screen.in-app #statusbar { color: #000; text-shadow: none; }
+#screen.in-app.app-dark #statusbar { color: #fff; text-shadow: 0 1px 3px rgba(0,0,0,.35); }
 
 /* ---------- Brightness dim ---------- */
 #dim-layer {
@@ -239,6 +244,11 @@ html, body {
   box-shadow: inset 0 0 0 .5px rgba(255,255,255,.25);
 }
 #dock .app-icon .glyph { width: 56px; height: 56px; border-radius: 13.5px; }
+#dock .app-icon .label { display: none; }
+
+/* hide scrollbars inside apps (touch-style) */
+.app-content, .notes-list, .app-content * { scrollbar-width: none; }
+.app-content::-webkit-scrollbar, .notes-list::-webkit-scrollbar { display: none; }
 
 /* ---------- App layer / windows ---------- */
 #app-layer {
@@ -405,7 +415,7 @@ input:focus, textarea:focus { border-color: #007aff; }
 
 /* ---------- Small screens (phone browsers still get a device) ---------- */
 @media (max-width: 640px) {
-  #device { border-radius: 34px; --bezel: 14px; }
-  #home-btn { width: 50px; height: 50px; }
+  #device { border-radius: 34px; --bezel: 14px; --bezel-bottom: 44px; }
+  #home-btn { width: 36px; height: 36px; }
   #icon-grid { grid-template-columns: repeat(4, 1fr); }
 }

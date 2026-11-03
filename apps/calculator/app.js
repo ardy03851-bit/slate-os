@@ -6,7 +6,7 @@
     .calc-display { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: flex-end; padding: 0 12px 16px; min-height: 90px; }
     .calc-history { font-size: 15px; color: #8e8e93; min-height: 20px; }
     .calc-value { font-size: clamp(48px, 9vw, 76px); font-weight: 300; letter-spacing: -2px; line-height: 1.1; word-break: break-all; text-align: right; }
-    .calc-pad { display: grid; grid-template-columns: repeat(4, minmax(52px, 88px)); gap: 12px; justify-content: center; }
+    .calc-pad { display: grid; grid-template-columns: repeat(4, min(88px, calc((100dvh - 300px) * 0.16))); gap: 12px; justify-content: center; }
     .calc-btn { border: none; border-radius: 50%; font-family: inherit; font-size: 26px; font-weight: 500; color: #fff; background: #333333; cursor: pointer; transition: filter .1s, transform .08s; width: 100%; aspect-ratio: 1; align-self: center; }
     .calc-btn:active { transform: scale(.94); }
     .calc-btn.fn { background: #a5a5a5; color: #000; }

@@ -2,86 +2,128 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <meta name="theme-color" content="#111114" />
-  <title>WebPad — a tiny iPad for the web</title>
-  <link rel="icon" type="image/png" href="assets/icons/webpad.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no" />
+  <meta name="theme-color" content="#0a0a0c" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="description" content="Slate OS — a full-screen web operating system for tablets." />
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" type="image/png" href="assets/icons/slate.png" />
+  <link rel="apple-touch-icon" href="assets/icons/slate.png" />
+  <title>Slate OS</title>
   <link rel="stylesheet" href="css/os.css" />
 </head>
 <body>
-  <div id="stage">
-    <div id="device">
-      <div class="camera-dot"></div>
-      <div id="screen" class="light-ui">
-        <!-- status bar -->
-        <div id="statusbar">
-          <span id="sb-time">9:41</span>
-          <span class="sb-right">
-            <svg class="sb-icon" viewBox="0 0 16 12" width="17" height="13"><rect x="0" y="8.5" width="3" height="3.5" rx="1" fill="currentColor"/><rect x="4.3" y="6" width="3" height="6" rx="1" fill="currentColor"/><rect x="8.6" y="3" width="3" height="9" rx="1" fill="currentColor"/><rect x="12.9" y="0.5" width="3" height="11.5" rx="1" fill="currentColor"/></svg>
-            <span id="sb-batt">100%</span>
-          </span>
-        </div>
-
-        <!-- dim overlay for brightness -->
-        <div id="dim-layer"></div>
-
-        <!-- boot screen -->
-        <div id="boot-screen">
-          <img src="assets/icons/webpad.png" alt="WebPad" width="96" height="96" />
-          <div class="boot-bar"><div class="boot-fill"></div></div>
-        </div>
-
-        <!-- lock screen -->
-        <div id="lock-screen" class="hidden">
-          <div class="lock-time" id="lock-time">9:41</div>
-          <div class="lock-date" id="lock-date">Tuesday, 3 November</div>
-          <div class="lock-hint">
-            <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
-            <span>Swipe up to unlock</span>
-          </div>
-        </div>
-
-        <!-- home screen -->
-        <div id="home-screen" class="hidden">
-          <div id="icon-grid"></div>
-          <div id="page-dots"><span class="dot active"></span></div>
-          <div id="dock"></div>
-        </div>
-
-        <!-- app layer -->
-        <div id="app-layer"></div>
-
-        <!-- control center -->
-        <div id="cc-scrim"></div>
-        <div id="control-center">
-          <div class="cc-grid">
-            <div class="cc-card cc-main">
-              <div class="cc-row">
-                <button class="cc-tile" id="cc-dark" title="Dark mode">
-                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-                </button>
-                <button class="cc-tile" id="cc-wallpaper" title="Next wallpaper">
-                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.8"/><path d="M21 15l-5-5L5 21"/></svg>
-                </button>
-              </div>
-            </div>
-            <div class="cc-card cc-slider">
-              <div class="cc-slider-head">
-                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
-                <span>Brightness</span>
-              </div>
-              <input type="range" id="cc-brightness" min="25" max="100" value="100" />
-            </div>
-          </div>
-        </div>
-
-        <!-- toast -->
-        <div id="toast" class="hidden"></div>
-      </div>
-
-      <!-- home button -->
-      <button id="home-btn" aria-label="Home"></button>
+  <div id="os">
+    <!-- status bar -->
+    <div id="statusbar">
+      <span id="sb-time">9:41</span>
+      <span class="sb-center" id="sb-center"></span>
+      <span class="sb-right">
+        <svg id="sb-wifi" class="sb-icon" viewBox="0 0 16 12" width="16" height="12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M1.5 4.5C4 2.2 12 2.2 14.5 4.5"/><path d="M4 7c1.8-1.6 6.2-1.6 8 0"/><path d="M6.6 9.4c.9-.8 1.9-.8 2.8 0"/><circle cx="8" cy="11.2" r="0.9" fill="currentColor" stroke="none"/></svg>
+        <span id="sb-batt">100%</span>
+      </span>
     </div>
+
+    <!-- brightness dim -->
+    <div id="dim-layer"></div>
+
+    <!-- boot splash -->
+    <div id="boot-screen">
+      <img src="assets/icons/slate.png" alt="Slate OS" width="88" height="88" />
+      <div class="boot-name">Slate OS</div>
+      <div class="boot-bar"><div class="boot-fill"></div></div>
+    </div>
+
+    <!-- lock screen -->
+    <div id="lock-screen" class="hidden">
+      <div class="lock-top" id="lock-weather"></div>
+      <div class="lock-mid">
+        <div class="lock-time" id="lock-time">9:41</div>
+        <div class="lock-date" id="lock-date">Tuesday, 3 November</div>
+      </div>
+      <div class="lock-hint">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+        <span>Swipe up to unlock</span>
+      </div>
+    </div>
+
+    <!-- home: swipeable pages -->
+    <div id="home" class="hidden">
+      <div id="pages"></div>
+      <div id="page-dots"></div>
+      <div id="dock"></div>
+    </div>
+
+    <!-- spotlight search -->
+    <div id="spotlight" class="hidden">
+      <div id="spot-card">
+        <div class="spot-input-wrap">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/></svg>
+          <input id="spot-input" type="text" placeholder="Search apps and the web" autocomplete="off" />
+        </div>
+        <div id="spot-results"></div>
+      </div>
+    </div>
+
+    <!-- app switcher -->
+    <div id="switcher" class="hidden">
+      <div id="switcher-cards"></div>
+      <button id="switcher-close-all" class="btn">Close All</button>
+    </div>
+
+    <!-- app layer -->
+    <div id="app-layer"></div>
+
+    <!-- control center -->
+    <div id="cc-scrim"></div>
+    <div id="control-center">
+      <div class="cc-grid">
+        <div class="cc-card cc-main">
+          <div class="cc-row">
+            <button class="cc-tile" id="cc-dark" title="Dark appearance">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+            </button>
+            <button class="cc-tile" id="cc-dnd" title="Focus">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3a6 6 0 0 0-6 6v5H4.5a1.5 1.5 0 0 0 0 3H6v1a6 6 0 0 0 12 0v-1h1.5a1.5 1.5 0 0 0 0-3H18V9a6 6 0 0 0-6-6z"/><path d="M2 8h3M19 8h3"/></svg>
+            </button>
+            <button class="cc-tile" id="cc-wallpaper" title="Next wallpaper">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="8.5" cy="8.5" r="1.8"/><path d="M21 15l-5-5L5 21"/></svg>
+            </button>
+          </div>
+          <div class="cc-row">
+            <button class="cc-tile" id="cc-lock-screen" title="Lock">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="5" y="11" width="14" height="10" rx="2.5"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            </button>
+            <button class="cc-tile" id="cc-battery-saver" title="Low Power Mode">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="17" height="10" rx="2.5"/><path d="M22 11v2"/><path d="M9.5 10l-1.7 2.5h2.4L8.5 15"/></svg>
+            </button>
+            <button class="cc-tile" id="cc-settings" title="Settings">
+              <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="3.2"/><path d="M19.4 15a1.7 1.7 0 0 0 .34 1.87l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.7 1.7 0 0 0-1.87-.34 1.7 1.7 0 0 0-1 1.55V21a2 2 0 1 1-4 0v-.09a1.7 1.7 0 0 0-1.11-1.55 1.7 1.7 0 0 0-1.87.34l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.7 1.7 0 0 0 .34-1.87 1.7 1.7 0 0 0-1.55-1H3a2 2 0 1 1 0-4h.09a1.7 1.7 0 0 0 1.55-1.11 1.7 1.7 0 0 0-.34-1.87l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.7 1.7 0 0 0 1.87.34h0a1.7 1.7 0 0 0 1-1.55V3a2 2 0 1 1 4 0v.09a1.7 1.7 0 0 0 1 1.55h0a1.7 1.7 0 0 0 1.87-.34l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.7 1.7 0 0 0-.34 1.87v0a1.7 1.7 0 0 0 1.55 1H21a2 2 0 1 1 0 4h-.09a1.7 1.7 0 0 0-1.55 1z"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="cc-card cc-slider">
+          <div class="cc-slider-head">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2.5M12 19.5V22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M2 12h2.5M19.5 12H22M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+            <span>Brightness</span>
+          </div>
+          <input type="range" id="cc-brightness" min="25" max="100" value="100" />
+          <div class="cc-slider-head" style="margin-top:10px">
+            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M11 5 6 9H2v6h4l5 4V5z"/><path d="M15.5 8.5a5 5 0 0 1 0 7"/></svg>
+            <span>Volume</span>
+          </div>
+          <input type="range" id="cc-volume" min="0" max="100" value="70" />
+        </div>
+      </div>
+    </div>
+
+    <!-- home bar / gesture zone -->
+    <div id="home-bar" title="Home"></div>
+
+    <!-- toast -->
+    <div id="toast" class="hidden"></div>
   </div>
 
   <script src="js/os.js"></script>

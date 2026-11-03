@@ -1,0 +1,16 @@
+{
+  "name": "Slate OS",
+  "short_name": "Slate",
+  "description": "A full-screen web operating system for tablets.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#0a0a0c",
+  "theme_color": "#0a0a0c",
+  "icons": [
+    { "src": "assets/icons/slate-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "assets/icons/slate-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "assets/icons/slate.png", "sizes": "256x256", "type": "image/png" }
+  ]
+}

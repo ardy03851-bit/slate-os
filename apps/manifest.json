@@ -1,0 +1,45 @@
+{
+  "generated": "2026-11-03T09:02:12.282Z",
+  "apps": [
+    {
+      "id": "calculator",
+      "name": "Calculator",
+      "version": "1.0.0",
+      "author": "WebPad Team",
+      "category": "Utilities",
+      "description": "A fast, beautiful calculator with keyboard support."
+    },
+    {
+      "id": "clock",
+      "name": "Clock",
+      "version": "1.0.0",
+      "author": "WebPad Team",
+      "category": "Utilities",
+      "description": "Analog clock, digital time and world clocks."
+    },
+    {
+      "id": "game2048",
+      "name": "2048",
+      "version": "1.0.0",
+      "author": "WebPad Team",
+      "category": "Games",
+      "description": "The classic tile-merging puzzle. Swipe or use arrow keys."
+    },
+    {
+      "id": "notes",
+      "name": "Notes",
+      "version": "1.0.0",
+      "author": "WebPad Team",
+      "category": "Productivity",
+      "description": "Simple notes that save automatically on your device."
+    },
+    {
+      "id": "weather",
+      "name": "Weather",
+      "version": "1.0.0",
+      "author": "WebPad Team",
+      "category": "Weather",
+      "description": "Live weather and a 7-day forecast, powered by Open-Meteo."
+    }
+  ]
+}
